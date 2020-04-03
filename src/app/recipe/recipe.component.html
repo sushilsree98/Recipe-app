@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5">
+      <app-recipe-list (recipeShift)="onrecipeShifted($event)"></app-recipe-list>
+    </div>
+    <div class="col-md-7">
+      <app-recipe-detail
+      *ngIf="recipeWasShifted;else infoText"
+      [recipe]="recipeWasShifted"
+      ></app-recipe-detail>
+      <ng-template #infoText>
+        <p>Please select a recipe!</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+

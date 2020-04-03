@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'recipie';
+  recipeValue: boolean;
+
+  recipe(event: boolean) {
+    this.recipeValue = event;
+  }
 }
+

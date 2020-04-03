@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <app-shopping-edit (ingredientAdded)="ingredientFunc($event)"></app-shopping-edit>
+      <hr>
+      <ul class="list-group">
+        <a class="list-group-item" style="cursor:pointer"
+           *ngFor="let product of ingredient"
+          >
+          {{product.name}}({{product.amount}})
+        </a>
+      </ul>
+    </div>
+  </div>
+</div>
+
