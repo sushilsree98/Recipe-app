@@ -8,9 +8,12 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeDetailComponent implements OnInit {
   @Input() recipe: Recipe;
+  openClass: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  openFunc() {
+    this.openClass = !this.openClass;
+  }
 }

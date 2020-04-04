@@ -11,9 +11,9 @@
     </ul>
     <ul class="navbar-nav ml-auto">
      
-      <li class="dropdown">
+      <li class="dropdown" appDropDown (click)="openFunc()">
         <a class="dropdown-toggle" role="button" href="#">Manage <span class="caret"></span></a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" [ngClass]="{show:openClass}">
           <li><a href="#">Save Data</a></li>
           <li><a href="#">Fetch Data</a></li>
         </ul>
