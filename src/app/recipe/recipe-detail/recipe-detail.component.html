@@ -19,7 +19,7 @@
               class="btn btn-primary dropdown-toggle">
       Manage recipe<span class="caret"></span></button>
       <ul class="dropdown-menu" [ngClass]="{show:openClass}">
-        <li><a href="#">To shopping list</a></li>
+        <li><a (click)="addToShoppingList()" style="cursor:pointer">To shopping list</a></li>
         <li><a href="#">Edit recipe</a></li>
         <li><a href="#">Delete recipe</a></li>
       </ul>
