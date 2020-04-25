@@ -7,8 +7,9 @@
   <div class="row mt-4">
     <div class="col-lg-12" >
       <app-recipe-item
-        *ngFor="let key of Recipe"
+        *ngFor="let key of Recipe , let i = index"
         [recipeKey]="key"
-                     ></app-recipe-item>
+        [index] = "i"            
+        ></app-recipe-item>
     </div>
   </div>

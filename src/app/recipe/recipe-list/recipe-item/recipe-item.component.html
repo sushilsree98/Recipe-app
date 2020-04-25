@@ -1,4 +1,8 @@
-<a (click)="onRecipeSelected()" class="list-group-item ">
+<a
+style="cursor: pointer;"
+ class="list-group-item "
+ [routerLink]="[index]"
+ >
   <div class="col-md-4 float-left">
     <img [src]="recipeKey.imagePath" alt="" class="img-responsive mt-2" style="max-height:50px;">
   </div>
