@@ -26,7 +26,9 @@
           type="submit"
           [disabled]="!f.valid"
           >{{canEdit ? "Update" : "Add"}}</button>
-          <button class="btn btn-danger m-1" type="button">Delete</button>
+          <button class="btn btn-danger m-1"
+          *ngIf="canEdit"
+          type="button" (click)="onDelete()">Delete</button>
           <button class="btn btn-primary m-1" type="button" (click)="this.temForm.reset();this.canEdit = false">Clear</button>
         </div>
         </div>

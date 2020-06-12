@@ -1,1 +1,58 @@
-<p>recipe-edit works!</p>
+<div class="col-12 mt-2">
+    <form >
+        <div class="row">
+            <button type="submit" class="btn btn-success mx-2">Save</button>
+            <button type="button" class="btn btn-danger mx-2">Cancel</button>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"
+                     id="name"
+                     class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                 <label for="imagePath">Image URL</label>
+                 <input type="text" id="imagePath" class="form-control">
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                  <img src="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea type="text" id="description" class="form-control" rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <div class="row">
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <input type="text" id="ingredient" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <input type="number" id="ingredient" class="form-control">
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-danger">X</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </form>
+</div>
