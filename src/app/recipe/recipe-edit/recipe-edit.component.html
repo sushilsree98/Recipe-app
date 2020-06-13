@@ -1,5 +1,5 @@
 <div class="col-12 mt-2">
-    <form >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div class="row">
             <button type="submit" class="btn btn-success mx-2">Save</button>
             <button type="button" class="btn btn-danger mx-2">Cancel</button>
@@ -10,6 +10,7 @@
                     <label for="name">Name</label>
                     <input type="text"
                      id="name"
+                     formControlName='name'
                      class="form-control">
                 </div>
             </div>
@@ -18,7 +19,7 @@
             <div class="col-12">
                 <div class="form-group">
                  <label for="imagePath">Image URL</label>
-                 <input type="text" id="imagePath" class="form-control">
+                 <input type="text" id="imagePath" class="form-control" formControlName='imagePath'>
                </div>
             </div>
         </div>
@@ -33,7 +34,7 @@
           <div class="col-12">
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea type="text" id="description" class="form-control" rows="6"></textarea>
+              <textarea type="text" formControlName="description" id="description" class="form-control" rows="6"></textarea>
             </div>
           </div>
         </div>
