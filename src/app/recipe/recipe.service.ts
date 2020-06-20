@@ -23,7 +23,7 @@ export class RecipeService {
   ]
 
   constructor(private slService: ShoppingListService) { }
-
+  updatedRecipe = new Subject<Recipe[]>();
   recipeFunc() {
     return this.recipe.slice();
   }
@@ -34,5 +34,15 @@ export class RecipeService {
 
   addingShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients);
+  }
+
+  addRecipe(recipe:Recipe){
+    this.recipe.push(recipe)
+    return this.updatedRecipe.next(this.recipe.slice());
+  }
+
+  updateRecipe(id:number, recipe:Recipe){
+    this.recipe[id] = recipe;
+    return this.updatedRecipe.next(this.recipe.slice());
   }
 }

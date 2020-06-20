@@ -1,7 +1,9 @@
 <div class="col-12 mt-2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
         <div class="row">
-            <button type="submit" class="btn btn-success mx-2">Save</button>
+            <button type="submit" 
+            [disabled]="!form.valid"
+            class="btn btn-success mx-2">Save</button>
             <button type="button" class="btn btn-danger mx-2">Cancel</button>
         </div>
         <div class="row mt-2">
@@ -39,7 +41,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12" formArrayName="ingredients">
+          <div class="col-12" formArrayName="ingredient">
               <div class="row"
               *ngFor="let ingredientCtrl of controls; let i = index"
               [formGroupName] = "i"
@@ -60,6 +62,12 @@
                     <button class="btn btn-danger">X</button>
                   </div>
               </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-lg-12">
+            <button class="btn btn-success" type="button" (click)="onAddIngredient()">Add ingredient</button>
           </div>
         </div>
     </form>
