@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { StorageService } from '../shared/storage.service';
 @Component({
   selector: "app-header",
   templateUrl: './header.component.html',
@@ -7,8 +8,16 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 export class HeaderComponent {
   openClass: boolean = false;
-  constructor() { }
+  constructor(private storage:StorageService) { }
   openFunc() {
     this.openClass = !this.openClass;
+  }
+
+  saveRecipe(){
+    this.storage.saveRecipe();
+  }
+
+  fetchRecipe(){
+    this.storage.getRecipe();
   }
 }
