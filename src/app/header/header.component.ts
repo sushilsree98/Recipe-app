@@ -18,6 +18,6 @@ export class HeaderComponent {
   }
 
   fetchRecipe(){
-    this.storage.getRecipe();
+    this.storage.getRecipe().subscribe();
   }
 }
