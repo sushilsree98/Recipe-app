@@ -1,18 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
-            <form >
+            <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" ngModel name="email" required email>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input class="form-control" type="password">
+                    <input class="form-control" type="password" ngModel name="password" required minlength="6">
                 </div>
-                <button type="submit" class="btn btn-primary">Sign up</button> | 
+                <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid">{{isLogging ? 'Sign in' : 'Sign up'}}</button> |
                 
-                <button type="button" class="btn btn-primary">click here to sign in</button>
+                <button type="button" class="btn btn-primary" (click)="onSwitch()">click here to {{isLogging ? 'Sign up' : 'Sign in'}}</button>
             </form>
         </div>
     </div>
