@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs'
 
 interface signUpResponse {
   idToken: string,
@@ -24,5 +26,17 @@ export class AuthService {
       returnSecureToken : true
     }
     )
+    .pipe(catchError(err=>{
+      let error_message = "An Unknown Error Occurred";
+      if(!err.error || !err.error.error){
+        return throwError(error_message);
+      }else{
+        switch(err.error.error.message){
+          case 'EMAIL_EXISTS':
+            error_message = "This Email already exists";
+        }
+      }
+      return throwError(error_message);
+    }))
   }
 }
