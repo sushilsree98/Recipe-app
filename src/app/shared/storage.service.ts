@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { RecipeService } from '../recipe/recipe.service';
 import { Recipe } from '../recipe/recipe.model';
-import { map, tap } from 'rxjs/operators'
+import { map, tap, take, exhaustMap } from 'rxjs/operators'
+import { AuthService } from '../auth/auth/auth.service';
 
 
 @Injectable({providedIn:"root"})
 export class StorageService{
 
     
-    constructor(private http:HttpClient,private recipeService:RecipeService){
+    constructor(private http:HttpClient,private recipeService:RecipeService, private authService: AuthService){
     }
     saveRecipe(){
         const recipe = this.recipeService.recipeFunc()
@@ -20,19 +21,21 @@ export class StorageService{
     }
 
     getRecipe(){
-       return this.http.get<Recipe[]>('https://recipe-app-b1b6a.firebaseio.com/recipes.json')
-            .pipe(
-                map(response=>{
-                return response.map(ele=>{
-                    return {
-                        ...ele, 
-                        ingredient : ele.ingredient ? ele.ingredient : []
-                    };
-                });
-            }),
-            tap(res=>{
-                this.recipeService.setRecipe(res);
+
+        return this.authService.user.pipe(take(1),exhaustMap(user=>{
+            return this.http.get<Recipe[]>('https://recipe-app-b1b6a.firebaseio.com/recipes.json',{
+                params: new HttpParams().set('auth', user.token)
             })
-            )
+        }), map(response => {
+            return response.map(ele => {
+                return {
+                    ...ele,
+                    ingredient: ele.ingredient ? ele.ingredient : []
+                };
+            });
+        }),
+            tap(res => {
+                this.recipeService.setRecipe(res);
+            }))
     }
 }
