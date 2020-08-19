@@ -22,11 +22,9 @@ export class StorageService{
 
     getRecipe(){
 
-        return this.authService.user.pipe(take(1),exhaustMap(user=>{
-            return this.http.get<Recipe[]>('https://recipe-app-b1b6a.firebaseio.com/recipes.json',{
-                params: new HttpParams().set('auth', user.token)
-            })
-        }), map(response => {
+         return this.http.get<Recipe[]>('https://recipe-app-b1b6a.firebaseio.com/recipes.json')
+             
+        .pipe(map(response => {
             return response.map(ele => {
                 return {
                     ...ele,
@@ -37,5 +35,5 @@ export class StorageService{
             tap(res => {
                 this.recipeService.setRecipe(res);
             }))
-    }
+        }
 }
