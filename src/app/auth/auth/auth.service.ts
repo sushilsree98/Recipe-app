@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError,tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs'
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
  export interface SignUpResponse {
   idToken: string,
@@ -19,7 +20,7 @@ import { User } from './user.model';
 export class AuthService {
 
   user = new BehaviorSubject<User>(null)
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   signUp(email, password){
     return this.http.post<SignUpResponse>("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBC4-kwDlgWZEnvCk2W_1yYzuEugu6bi1s",
@@ -47,6 +48,31 @@ export class AuthService {
       }))
   }
 
+  autoLogin(){
+
+    const user:{
+      email: string,
+      userId: string,
+      _token: string,
+      _expiry: string
+    } = JSON.parse(localStorage.getItem('user'))
+
+    if(!user){
+      return;
+    }
+
+    const loadedUser = new User(user.email,user.userId,user._token, new Date(user._expiry))
+
+    if(loadedUser.token){
+      this.user.next(loadedUser);
+    }
+  }
+
+  logout(){
+    this.user.next(null);
+    this.router.navigate(['/auth']);
+  }
+
   private AuthHandler(
     email:string,
     userId:string,
@@ -61,6 +87,7 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    localStorage.setItem('user',JSON.stringify(user));
   }
 
   private errorHandler(err:HttpErrorResponse){
