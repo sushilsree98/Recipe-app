@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   user = new BehaviorSubject<User>(null)
+  expiration_number:any
   constructor(private http:HttpClient,private router:Router) { }
 
   signUp(email, password){
@@ -61,7 +62,10 @@ export class AuthService {
       return;
     }
 
-    const loadedUser = new User(user.email,user.userId,user._token, new Date(user._expiry))
+    const loadedUser = new User(user.email,user.userId,user._token, new Date(user._expiry));
+
+    const expiration_duration = new Date(user._expiry).getTime() - new Date().getTime()
+    this.autologout(expiration_duration)
 
     if(loadedUser.token){
       this.user.next(loadedUser);
@@ -71,6 +75,17 @@ export class AuthService {
   logout(){
     this.user.next(null);
     this.router.navigate(['/auth']);
+    localStorage.clear()
+    if(this.expiration_number){
+      clearTimeout(this.expiration_number)
+    }
+    this.expiration_number = null;
+  }
+
+  autologout(expiryTime:number){
+    this.expiration_number = setTimeout(()=>{
+      this.logout()
+    },expiryTime)
   }
 
   private AuthHandler(
@@ -87,6 +102,7 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    this.autologout(expiresIn * 1000)
     localStorage.setItem('user',JSON.stringify(user));
   }
 
