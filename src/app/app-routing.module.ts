@@ -11,12 +11,16 @@ const routes: Routes = [
     pathMatch:'full'
   },
   {
-    path:"shoppinglist",
-    component:ShoppingListComponent
+    path:"recipe",
+    loadChildren:()=>import("./recipe/recipe.module").then(m=>m.RecipeModule)
   },
   {
-    path: 'auth',
-    component: AuthComponent
+    path:'shoppinglist',
+    loadChildren:()=>import('./shopping-list/shopping-list.module').then(m=>m.ShoppingListModule)
+  },
+  {
+    path:'auth',
+    loadChildren:()=>import('./auth/auth/auth.module').then(m=>m.AuthModule)
   }
 ];
 
