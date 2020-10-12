@@ -1,14 +1,16 @@
 <a
 style="cursor: pointer;"
- class="list-group-item "
+ class="list-group-item my-2 item "
  routerLinkActive="active"
  [routerLink]="[index]"
  >
-  <div class="col-md-4 float-left">
-    <img [src]="recipeKey.imagePath" alt="" class="img-responsive mt-2" style="max-height:50px;">
-  </div>
-  <div class="">
-    <h4 class="list-group-item-heading">{{recipeKey.name}}</h4>
-    <p class="list-group-item-text">{{recipeKey.description}}</p>
-  </div>
+ <div class="row">
+   <div class="col-4">
+     <img [src]="recipeKey.imagePath" alt="" class="img-responsive mt-2" style="max-height:50px;">
+   </div>
+   <div class="col-8">
+     <h4 class="list-group-item-heading">{{recipeKey.name}}</h4>
+     <p class="list-group-item-text">{{recipeKey.description.slice(0,25)}}</p>
+   </div>
+ </div>
 </a>

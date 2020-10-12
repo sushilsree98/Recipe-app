@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../shared/storage.service';
 import { Recipe } from './recipe.model';
 import { RecipeService } from './recipe.service';
 
@@ -10,9 +11,9 @@ import { RecipeService } from './recipe.service';
 export class RecipeComponent implements OnInit {
 
   recipeWasShifted: Recipe = null;
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private storage: StorageService) { }
 
   ngOnInit(): void {
-  
+    this.storage.getRecipe().subscribe()
   }
 }
