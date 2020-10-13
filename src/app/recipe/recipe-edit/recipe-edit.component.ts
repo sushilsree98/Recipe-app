@@ -40,7 +40,7 @@ export class RecipeEditComponent implements OnInit {
           recipeList.push(
             new FormGroup({
               'name': new FormControl(ingredient.name,Validators.required),
-              'amount': new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^[0-9]+[1-9]*$/)])
+              'amount': new FormControl(ingredient.amount,Validators.required)
             })
           )
         }
@@ -58,7 +58,7 @@ export class RecipeEditComponent implements OnInit {
     (<FormArray>this.form.get('ingredient')).push(
        new FormGroup({
         'name': new FormControl(null,Validators.required),
-        'amount': new FormControl(null,[Validators.required,Validators.pattern(/^[0-9]+[1-9]*$/)])
+        'amount': new FormControl(null,Validators.required)
       })
     )
   }
